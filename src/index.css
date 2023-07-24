@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .container-fluid {
+    @apply max-w-[1709px] px-[16px] mx-auto;
+  }
+  .foot-menu-title {
+    @apply text-[16px] mb-[20px] p-[0_5px] uppercase;
+  }
+
+  .foot-ul-default {
+    @apply [&>li]:p-[0_5px] leading-8;
+  }
+
+  .swiper-container {
+    @apply relative m-[0_auto] overflow-hidden p-0 z-[1] cursor-grab;
+  }
+
+  .before-search-bar-cat {
+    @apply before:bg-body-opacity before:bottom-[8px] before:content-[''] before:left-[-16px] before:absolute before:top-[8px] before:w-[1px];
+  }
+}
+
+@media (prefers-color-scheme: light) {
+}
