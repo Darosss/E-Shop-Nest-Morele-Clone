@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Home } from "./home";
-import { HeadMenu, OptionsMenu } from "./menu";
+import { HeadMenu, CategoriesMenu } from "./menu";
 import { Footer } from "./footer";
 
 export function App() {
@@ -11,7 +11,7 @@ export function App() {
         <HeadMenu />
       </div>
       <div>
-        <OptionsMenu />
+        <CategoriesMenu />
       </div>
       <main className="bg-content">
         <div className="container-fluid">
