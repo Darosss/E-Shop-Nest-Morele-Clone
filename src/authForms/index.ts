@@ -1,1 +1,1 @@
-export { AuthForms } from "./Login";
+export { AuthForms } from "./AuthForms";
