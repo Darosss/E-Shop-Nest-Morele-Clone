@@ -11,6 +11,7 @@ import { HeadMenu, CategoriesMenu } from "./menu";
 import { Footer } from "./footer";
 import { AuthForms } from "./authForms";
 import { AuthContextProvider } from "./auth";
+import { CategoriesContextProvider } from "./api/CategoriesContext";
 
 export function App() {
   return (
@@ -32,18 +33,20 @@ export function App() {
 function DefaultWrapper() {
   return (
     <>
-      <div className="sticky top-0 z-50 bg-body">
-        <HeadMenu />
-      </div>
-      <div>
-        <CategoriesMenu />
-      </div>
-      <main className="bg-content">
-        <div className="container-fluid">
-          <Outlet />
+      <CategoriesContextProvider>
+        <div className="sticky top-0 z-50 bg-body">
+          <HeadMenu />
         </div>
-        <Footer />
-      </main>
+        <div>
+          <CategoriesMenu />
+        </div>
+        <main className="bg-content">
+          <div className="container-fluid">
+            <Outlet />
+          </div>
+          <Footer />
+        </main>
+      </CategoriesContextProvider>
     </>
   );
 }
