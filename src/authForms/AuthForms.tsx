@@ -1,7 +1,7 @@
 import React from "react";
 import { AuthTabs } from "./AuthTabs";
 
-export function Login() {
+export function AuthForms() {
   return (
     <>
       <main className="bg-content h-screen">
