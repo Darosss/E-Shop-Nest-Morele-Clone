@@ -1,3 +1,6 @@
+import React from "react";
+import { CategoriesSearch } from "./CategoriesSearch";
+
 export function SearchBar() {
   return (
     <>
@@ -15,9 +18,9 @@ export function SearchBar() {
               <div className="relative">
                 <div>
                   {/* morele dropwnown */}
-                  <div>
+                  <div className="w-full p-1">
                     {/* md top */}
-                    Wszystkie dzialy
+                    <CategoriesSearch />
                   </div>
 
                   <div>{/* md list */}</div>
