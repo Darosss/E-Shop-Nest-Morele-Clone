@@ -1,6 +1,21 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { CategoriesEndpoints } from "../api/backend-endpoints";
 import { Category } from "../interfaces";
+import { ApiResponse } from "../interfaces/api-data";
 
 export function CategoriesMenu() {
+  const [categoriesList, setCategoriesList] = useState<Category[]>([]);
+
+  useEffect(() => {
+    axios
+      .get<ApiResponse<Category[]>>(CategoriesEndpoints.GET_HEAD_CATEGORIES)
+      .then((response) => {
+        console.log(response);
+        setCategoriesList(response.data.data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
   return (
     <>
       <div className="min-w-[120px] bg-white shadow-default">
@@ -20,9 +35,23 @@ export function CategoriesMenu() {
                     <ul className="m-[-10px_0_10px] p-[16px_0_8px] [&>li]:p-1 text-left [&>li]:font-semibold text-[14px] [&>li>span]:p-[8px_40px_8px_16px] [&>li]:mt-[8px] ">
                       {/* categories
                       cn current deparments cn level */}
-                      <li>
-                        <span>link</span>
-                      </li>
+                      {categoriesList.map((category, idx) => (
+                        <li key={idx} className="group">
+                          <a
+                            href={`/category/${category.name}/`}
+                            className="group-hover:text-orange"
+                          >
+                            <span className=" p-[8px_40px_8px_16px] relative z-30">
+                              {category.name}
+                            </span>
+                          </a>
+
+                          <CategoryMenu
+                            className="group-hover:block"
+                            subcategories={category.subcategories}
+                          />
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -60,8 +89,8 @@ function CategoryMenu({
         {/* cn-shop-window cn-level */}
         <div className="flex justify-between">
           {/* cn rows */}
-          {subcategories?.map((category) => (
-            <ul>
+          {subcategories?.map((category, idx) => (
+            <ul key={idx}>
               <li>{category.name}</li>
             </ul>
           ))}
@@ -70,21 +99,3 @@ function CategoryMenu({
     </>
   );
 }
-
-/*
- .cn-shop-window {
-  background:#fff;
-  border:2px solid #ff503c;
-  border-radius:8px;
-  box-shadow:0 4px 8px 0 rgba(0,0,0,.1);
-  display:none;
-  left:400px;
-  min-height:100%;
-  padding:32px;
-  pointer-events:auto;
-  position:absolute;
-  right:0;
-  top:0;
-  z-index:-1
- } 
-*/
