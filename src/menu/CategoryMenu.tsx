@@ -1,3 +1,6 @@
+import React from "react";
+import { Category } from "../interfaces";
+
 export function CategoryMenu({
   subcategories,
   className = "",
