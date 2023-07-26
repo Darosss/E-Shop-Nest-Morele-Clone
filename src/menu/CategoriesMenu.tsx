@@ -1,22 +1,11 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { CategoriesEndpoints } from "../api/backend-endpoints";
-import { Category } from "../interfaces";
-import { ApiResponse } from "../interfaces/api-data";
+import React from "react";
+import { useContext } from "react";
 import { CategoryMenu } from "./CategoryMenu";
+import { CategoriesContext } from "../api/CategoriesContext";
 
 export function CategoriesMenu() {
-  const [categoriesList, setCategoriesList] = useState<Category[]>([]);
+  const { categoriesList } = useContext(CategoriesContext);
 
-  useEffect(() => {
-    axios
-      .get<ApiResponse<Category[]>>(CategoriesEndpoints.GET_HEAD_CATEGORIES)
-      .then((response) => {
-        console.log(response);
-        setCategoriesList(response.data.data);
-      })
-      .catch((err) => console.error(err));
-  }, []);
   return (
     <>
       <div className="min-w-[120px] bg-white shadow-default">
