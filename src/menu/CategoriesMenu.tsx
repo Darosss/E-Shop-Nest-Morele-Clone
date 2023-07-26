@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { CategoriesEndpoints } from "../api/backend-endpoints";
 import { Category } from "../interfaces";
 import { ApiResponse } from "../interfaces/api-data";
+import { CategoryMenu } from "./CategoryMenu";
 
 export function CategoriesMenu() {
   const [categoriesList, setCategoriesList] = useState<Category[]>([]);
@@ -68,32 +69,6 @@ export function CategoriesMenu() {
               </div>
             </nav>
           </div>
-        </div>
-      </div>
-    </>
-  );
-}
-
-function CategoryMenu({
-  subcategories,
-  className = "",
-}: {
-  subcategories?: Category[];
-  className?: string;
-}) {
-  return (
-    <>
-      <div
-        className={`hidden rounded border-[2px] border-orange bg-body absolute left-[260px] min-h-[100%] p-[32px] top-0 z-1 right-0 ${className}`}
-      >
-        {/* cn-shop-window cn-level */}
-        <div className="flex justify-between">
-          {/* cn rows */}
-          {subcategories?.map((category, idx) => (
-            <ul key={idx}>
-              <li>{category.name}</li>
-            </ul>
-          ))}
         </div>
       </div>
     </>
