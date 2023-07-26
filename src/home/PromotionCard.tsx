@@ -71,7 +71,7 @@ export function PromotionCard() {
             <div className="promo-box-to-basket">
               <a
                 href="/basket/add/12766881"
-                className="flex text-orange font-semibold justify-center border border-orange rounded-md w-full p-[12px_16px]"
+                className="common-button-w-outline"
               >
                 Do koszyka
               </a>
