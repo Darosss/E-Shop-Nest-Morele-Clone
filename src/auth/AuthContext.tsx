@@ -29,11 +29,14 @@ export const AuthContextProvider = ({
     Cookies.set("accessToken", token, { expires: 7 });
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     setUser(user);
+
+    window.location.replace("/");
   };
 
   const logout = () => {
     Cookies.remove("accessToken");
     setUser(null);
+    window.location.reload();
   };
 
   useEffect(() => {
