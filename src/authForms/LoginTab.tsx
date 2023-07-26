@@ -29,7 +29,7 @@ export function LoginTab() {
   return (
     <>
       <div>
-        <form className="auth-form">
+        <form className="auth-form" onSubmit={(e) => e.preventDefault()}>
           <input
             type="text"
             placeholder="e-mail"
