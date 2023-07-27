@@ -2,17 +2,17 @@ import React from "react";
 import { useContext } from "react";
 import { CategoryMenu } from "./CategoryMenu";
 import { CategoriesContext } from "../api/CategoriesContext";
+import { replaceWholeSpaces } from "../helpers/string.helpers";
 
 export function CategoriesMenu() {
   const { categoriesList } = useContext(CategoriesContext);
-
   return (
     <>
       <div className="min-w-[120px] bg-white shadow-default">
         <div className="container-fluid">
           <div className="mr-[8px] flex flex-wrap relative">
             <nav className="max-w-full w-[260px] shadow-default flex content-center justify-center ">
-              <div className="flex align-center items-center text-orange font-semibold">
+              <div className="flex align-center items-center text-orange font-semibold ">
                 KATEGORIE
                 {/* cn-heading */}
               </div>
@@ -28,7 +28,9 @@ export function CategoriesMenu() {
                       {categoriesList.map((category, idx) => (
                         <li key={idx} className="group">
                           <a
-                            href={`/category/${category.name}/`}
+                            href={`/category/${replaceWholeSpaces(
+                              category.name
+                            )}/`}
                             className="group-hover:text-orange"
                           >
                             <span className=" p-[8px_40px_8px_16px] relative z-30">
