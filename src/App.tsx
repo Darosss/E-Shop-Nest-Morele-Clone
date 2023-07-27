@@ -23,6 +23,10 @@ export function App() {
               <Route path="/" element={<Home />} />
             </Route>
             <Route path="/login" element={<AuthForms />} />
+            <Route
+              path="/soon/*"
+              element={<>This will be implemented soon</>}
+            />
           </Routes>
         </Router>
       </AuthContextProvider>
