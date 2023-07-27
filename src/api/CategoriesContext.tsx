@@ -23,7 +23,6 @@ export function CategoriesContextProvider({
     axios
       .get<ApiResponse<Category[]>>(CategoriesEndpoints.GET_HEAD_CATEGORIES)
       .then((response) => {
-        console.log(response, "categories context");
         setCategoriesList(response.data.data);
       })
       .catch((err) => console.error(err));
