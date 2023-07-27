@@ -16,7 +16,7 @@ export function CategoriesMenu() {
                 KATEGORIE
                 {/* cn-heading */}
               </div>
-              <div className="absolute top-full rounded-b-xl min-h-[597px] left-0 right-0">
+              <div className="absolute top-full rounded-b-xl min-h-[597px] left-0 right-0 z-40">
                 {/* cn-window*/}
                 <div className="bg-body w-[260px] min-h-[597px] ">
                   {/* cn-bar */}
