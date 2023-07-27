@@ -4,6 +4,7 @@ interface ItemImages {
   description: string;
   imgSrc: string;
 }
+//TODO: add don't show this anymore(add to localstorage if should be showed?)
 
 export function SliderBoxInfo({
   title,
@@ -15,19 +16,22 @@ export function SliderBoxInfo({
   return (
     <>
       <div className="w-full bg-body rounded-xl">
-        <div className="mb-[24px] relative">
+        <div className="mb-[8px] relative">
           {/* head */}
           <h2 className="m-[8px_16px] inline-block	text-[18px] font-semibold">
             {title}
           </h2>
         </div>
-        <div className="min-h-[265px]">
+        <div className="min-h-[225px] p-3">
           {/* content */}
           <div className="swipper-container">
-            <div className="h-100 flex relative flex">
+            <div className="h-100 relative flex justify-between">
               {/* swipper wrapper here arrow etc */}
               {items.map((item, idx) => (
-                <div key={idx} className="min-h-[200px] relative w-[215px]">
+                <div
+                  key={idx}
+                  className="group min-h-[200px] relative w-[215px] "
+                >
                   <div className="flex">
                     <img
                       loading="eager"
@@ -42,10 +46,16 @@ export function SliderBoxInfo({
                     <span>{item.nameDesc}</span>
                   </div>
                   {/* //TODO: add show desc on hover*/}
-                  <div className=" flex flex-wrap">
-                    <p className="hidden px-3 text-center bg-content">
-                      {item.description}
-                    </p>
+                  <div className="flex flex-col justify-between group-hover:flex hidden rounded-md text-[12px] p-3 text-center bg-content absolute top-0 bottom-0 left-1">
+                    <p>{item.description}</p>
+                    {item.url ? (
+                      <a
+                        href={item.url}
+                        className="bg-orange p-3 rounded-md text-white text-[14px] font-semibold"
+                      >
+                        Sprawdź
+                      </a>
+                    ) : null}
                   </div>
                 </div>
               ))}
