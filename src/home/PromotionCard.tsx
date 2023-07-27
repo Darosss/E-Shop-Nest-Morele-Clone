@@ -1,3 +1,5 @@
+import { Progress } from "flowbite-react";
+
 export function PromotionCard() {
   return (
     <>
@@ -57,9 +59,12 @@ export function PromotionCard() {
           <div className="promo-box-availability mt-[20px]">
             <div className="status-box">
               <div className="status-box-bar">
-                <div className="status-box-bar-status border bg-orange">
-                  STATUS BAR SOON
-                </div>
+                <Progress
+                  progress={(4 / 20) * 100}
+                  size="lg"
+                  className="rounded-md bg-content status-box-bar-status [&>div]:bg-orange"
+                  labelProgress
+                />
               </div>
               <div className="status-box-labels flex justify-between p-[16px]">
                 <div className="status-box-expired">Sprzedano 4 szt.</div>
