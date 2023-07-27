@@ -1,11 +1,7 @@
 import React from "react";
-import { useContext } from "react";
-import { CategoryMenu } from "./CategoryMenu";
-import { CategoriesContext } from "../api/CategoriesContext";
-import { replaceWholeSpaces } from "../helpers/string.helpers";
+import { ParentCategoryDropdown } from "./ParentCategoryDropdown";
 
 export function CategoriesMenu() {
-  const { categoriesList } = useContext(CategoriesContext);
   return (
     <>
       <div className="min-w-[120px] bg-white shadow-default">
@@ -25,25 +21,7 @@ export function CategoriesMenu() {
                     <ul className="m-[-10px_0_10px] p-[16px_0_8px] [&>li]:p-1 text-left [&>li]:font-semibold text-[14px] [&>li>span]:p-[8px_40px_8px_16px] [&>li]:mt-[8px] ">
                       {/* categories
                       cn current deparments cn level */}
-                      {categoriesList.map((category, idx) => (
-                        <li key={idx} className="group">
-                          <a
-                            href={`/category/${replaceWholeSpaces(
-                              category.name
-                            )}/`}
-                            className="group-hover:text-orange"
-                          >
-                            <span className=" p-[8px_40px_8px_16px] relative z-30">
-                              {category.name}
-                            </span>
-                          </a>
-
-                          <CategoryMenu
-                            className="group-hover:block"
-                            subcategories={category.subcategories}
-                          />
-                        </li>
-                      ))}
+                      <ParentCategoryDropdown />
                     </ul>
                   </div>
                 </div>
