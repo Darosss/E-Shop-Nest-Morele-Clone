@@ -1,9 +1,6 @@
-interface ItemImages {
-  name: string;
-  nameDesc: string;
-  description: string;
-  imgSrc: string;
-}
+import React from "react";
+import { SliderBoxInfoItems } from "../interfaces/components";
+
 //TODO: add don't show this anymore(add to localstorage if should be showed?)
 
 export function SliderBoxInfo({
@@ -11,7 +8,7 @@ export function SliderBoxInfo({
   items,
 }: {
   title: string;
-  items: ItemImages[];
+  items: SliderBoxInfoItems[];
 }) {
   return (
     <>
