@@ -3,6 +3,7 @@ import { SearchBar } from "../searchBar";
 import { MenuImages, MenuRoutes } from "./menu.enum";
 import { AuthContext } from "../auth";
 import { ProfilDropdown } from "./ProfilDropdown";
+import { Link } from "react-router-dom";
 
 export function HeadMenu() {
   const { user } = useContext(AuthContext);
@@ -15,7 +16,9 @@ export function HeadMenu() {
             <div className="ml-[-8px] mr-[8px] flex flex-row flex-wrap">
               <div className="max-w-full w-[280px] items-center flex pt-[2px] pl-[42px]">
                 <h1>
-                  <img src="/static/shop/logo/image-logo-morele.svg" />
+                  <Link to="/">
+                    <img src="/static/shop/logo/image-logo-morele.svg" />
+                  </Link>
                 </h1>
               </div>
               <div className="flex-[1_1_calc(100%-280px)] w-[calc(100%-280%)] flex items-center">
