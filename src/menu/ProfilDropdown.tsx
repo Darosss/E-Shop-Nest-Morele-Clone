@@ -4,11 +4,15 @@ import { useContext } from "react";
 import { AuthContext } from "../auth";
 import { User } from "../interfaces";
 
-export function ProfilDropdown({ user }: { user: User }) {
+export function ProfilDropdown({
+  user: { firstname, surname, email },
+}: {
+  user: User;
+}) {
   const { logout } = useContext(AuthContext);
   return (
     <Dropdown
-      label={user.username}
+      label={firstname && surname ? `${firstname} ${surname}` : email}
       trigger="hover"
       className="bg-body shadow-default"
     >
@@ -17,7 +21,7 @@ export function ProfilDropdown({ user }: { user: User }) {
       </Dropdown.Header>
       <Dropdown.Item>Zamówienia </Dropdown.Item>
       <Dropdown.Item>Zapytania</Dropdown.Item>
-      <Dropdown.Item>Listy zakupowe</Dropdown.Item>
+      {/* <Dropdown.Item>Listy zakupowe</Dropdown.Item> */}
       <Dropdown.Item>Moje konfiguracje</Dropdown.Item>
       <Dropdown.Item>Produkty do oceny</Dropdown.Item>
       <Dropdown.Item>Morele max</Dropdown.Item>
