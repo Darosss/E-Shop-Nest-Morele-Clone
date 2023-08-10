@@ -12,6 +12,7 @@ import { Footer } from "./footer";
 import { AuthForms } from "./authForms";
 import { AuthContextProvider } from "./auth";
 import { CategoriesContextProvider } from "./api/CategoriesContext";
+import { CategoryHeadView, CategoryView } from "./categories/";
 
 export function App() {
   return (
@@ -21,7 +22,21 @@ export function App() {
           <Routes>
             <Route element={<DefaultWrapper />}>
               <Route path="/" element={<Home />} />
+
+              <Route
+                path="/category/:categorySlug"
+                element={<CategoryView />}
+              />
+              <Route path="/:categoryParent" element={<CategoryHeadView />}>
+                <Route index element={<CategoryHeadView />} />
+
+                <Route
+                  path=":categorySubParent"
+                  element={<CategoryHeadView />}
+                />
+              </Route>
             </Route>
+
             <Route path="/login" element={<AuthForms />} />
             <Route
               path="/soon/*"
