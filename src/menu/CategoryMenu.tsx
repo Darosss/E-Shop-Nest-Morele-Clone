@@ -1,13 +1,15 @@
 import React from "react";
 import { Category } from "../interfaces";
-import { replaceWholeSpaces } from "../helpers/string.helpers";
+import { BreadcrumbLink } from "../categories";
 
 export function CategoryMenu({
   subcategories,
   className = "",
+  parentUrl,
 }: {
   subcategories?: Category[];
   className?: string;
+  parentUrl: string;
 }) {
   return (
     <>
@@ -21,15 +23,18 @@ export function CategoryMenu({
           {subcategories?.map((category, idx) => (
             <ul key={idx} className="font-normal">
               <li className="font-semibold">
-                <a href={`/${replaceWholeSpaces(category.name)}`}>
-                  {category.name}
-                </a>
+                <BreadcrumbLink
+                  categoryParent={parentUrl}
+                  categorySubParent={category.name}
+                />
               </li>
-              {category.subcategories?.map((thirdSubCat, thidIdx) => (
+              {category.subcategories?.map((categorySlug, thidIdx) => (
                 <li key={thidIdx}>
-                  <a href={`/${replaceWholeSpaces(thirdSubCat.name)}`}>
-                    {thirdSubCat.name}
-                  </a>
+                  <BreadcrumbLink
+                    categoryParent={parentUrl}
+                    categorySubParent={category.name}
+                    categorySlug={`${categorySlug.name}-${categorySlug.id}`}
+                  />
                 </li>
               ))}
             </ul>

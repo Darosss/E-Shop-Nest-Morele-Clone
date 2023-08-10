@@ -3,12 +3,11 @@ import { useContext } from "react";
 import { CategoryMenu } from "./CategoryMenu";
 import { CategoriesContext } from "../api/CategoriesContext";
 import { replaceWholeSpaces } from "../helpers/string.helpers";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export function ParentCategoryDropdown() {
   const { categoriesList } = useContext(CategoriesContext);
   const { pathname } = useLocation();
-
   return (
     <>
       <nav className="group/menu head-menu max-w-full w-[260px] shadow-default flex content-center justify-center ">
@@ -29,23 +28,27 @@ export function ParentCategoryDropdown() {
               <ul className="m-[-10px_0_10px] p-[16px_0_8px] [&>li]:p-1 text-left [&>li]:font-semibold text-[14px] [&>li>span]:p-[8px_40px_8px_16px] [&>li]:mt-[8px] ">
                 {/* categories
             cn current deparments cn level */}
-                {categoriesList.map((category, idx) => (
-                  <li key={idx} className="group">
-                    <a
-                      href={`/${replaceWholeSpaces(category.name)}/`}
-                      className="group-hover:text-orange"
-                    >
-                      <span className=" p-[8px_40px_8px_16px] relative z-30">
-                        {category.name}
-                      </span>
-                    </a>
+                {categoriesList.map((category, idx) => {
+                  const parentUrl = replaceWholeSpaces(category.name);
+                  return (
+                    <li key={idx} className="group">
+                      <Link
+                        to={`/${parentUrl}/`}
+                        className="group-hover:text-orange"
+                      >
+                        <span className=" p-[8px_40px_8px_16px] relative z-30">
+                          {category.name}
+                        </span>
+                      </Link>
 
-                    <CategoryMenu
-                      className="group-hover:block"
-                      subcategories={category.subcategories}
-                    />
-                  </li>
-                ))}
+                      <CategoryMenu
+                        className="group-hover:block"
+                        parentUrl={parentUrl}
+                        subcategories={category.subcategories}
+                      />
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>
