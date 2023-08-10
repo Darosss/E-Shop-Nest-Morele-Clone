@@ -1,0 +1,1 @@
+export { CategoryHeadView } from "./CategoryHeadView";
