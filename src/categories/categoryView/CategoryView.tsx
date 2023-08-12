@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { CategoryBreadcrumbs } from "../Breadcrumbs";
 import {
   Button,
@@ -14,37 +14,33 @@ import { Category } from "../../interfaces";
 import { ProductsList } from "./ProductsList";
 
 export function CategoryView() {
-  const { state } = useLocation();
-  const { categoryParent, categorySubParent, categorySlug, categoryId } =
-    useParams();
+  const { categoryParent, categorySubParent, category } = useParams();
 
   const [currentCategory, setCurrentCategory] = useState<Category>();
 
   useEffect(() => {
-    if (categoryId) {
+    if (category && categoryParent && categorySubParent) {
       axios
-        .get(`${CategoriesEndpoints.GET_HEAD_CATEGORIES}/${categoryId}`)
+        .get(
+          `${CategoriesEndpoints.GET_CATEGORY_BY_SLUG}/${categoryParent}/${categorySubParent}/${category}`
+        )
         .then(({ data: responseData }) => {
           setCurrentCategory(responseData.data);
         });
     }
-  }, [categoryId]);
+  }, [category, categoryParent, categorySubParent]);
   return (
     <>
       <div>
         {/* TODO: here probably can take from api, anyway it will be fetched for products so */}
-        <CategoryBreadcrumbs
-          categoryParent={state?.parentUrl || categoryParent}
-          categorySubParent={state?.subParentUrl || categorySubParent}
-          category={state?.category ?? { categoryId, categorySlug }}
-        />
+        <CategoryBreadcrumbs />
       </div>
       <div className="container-fluid">
         <div className="m-[32px_0_0]">
           {/* category page */}
           <h1 className="text-[22px] font-semibold">
             Category name (make an api call here to retrieve name and items -
-            {categorySlug || state?.categorySlug})
+            {category})
           </h1>
           <div className="flex ">
             <aside className="flex-[0_0_15%] mr-[32px]">
