@@ -1,3 +1,5 @@
+import { Product } from ".";
+
 export interface Category {
   id: number;
   name: string;
@@ -5,4 +7,5 @@ export interface Category {
   parentId?: number;
   subcategories: Category[];
   images: string[];
+  products?: Product[];
 }
