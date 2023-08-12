@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import { User } from "../interfaces/user";
 import axios from "axios";
 import { viteBackendUrl } from "../configs/env";
+import { AuthEndpoints } from "../api/backend-endpoints";
 
 interface UserContextType {
   user: User | null;
@@ -40,11 +41,16 @@ export const AuthContextProvider = ({
   };
 
   useEffect(() => {
+    async function fetchProfileData() {
+      return await axios.get(AuthEndpoints.PROFILE);
+    }
+
     const accessToken = Cookies.get("accessToken");
     if (accessToken) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
-      const user = { id: 1, username: "example_user" };
-      setUser(user);
+      fetchProfileData().then((response) => {
+        setUser(response.data.data);
+      });
     }
   }, []);
 
