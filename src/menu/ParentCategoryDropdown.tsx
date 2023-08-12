@@ -1,8 +1,6 @@
-import React from "react";
 import { useContext } from "react";
 import { CategoryMenu } from "./CategoryMenu";
 import { CategoriesContext } from "../api/CategoriesContext";
-import { replaceWholeSpaces } from "../helpers/string.helpers";
 import { Link, useLocation } from "react-router-dom";
 
 export function ParentCategoryDropdown() {
@@ -29,7 +27,7 @@ export function ParentCategoryDropdown() {
                 {/* categories
             cn current deparments cn level */}
                 {categoriesList.map((category, idx) => {
-                  const parentUrl = replaceWholeSpaces(category.name);
+                  const parentUrl = category.name;
                   return (
                     <li key={idx} className="group">
                       <Link
