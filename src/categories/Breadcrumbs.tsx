@@ -3,27 +3,6 @@ import { Breadcrumb, Dropdown } from "flowbite-react";
 import { Link, useParams } from "react-router-dom";
 import { CategoriesContext } from "../api/CategoriesContext";
 
-/**
- * Props for the BreadcrumbLink component.
- */
-export interface CategoryBreadcrumbsProps {
-  /**
-   * The category parent path.
-   */
-  categoryParent?: string;
-  /**
-   * The category subparent path.
-   */
-  categorySubParent?: string;
-  /**
-   * The category slug path.
-   */
-  category?: {
-    categorySlug: string;
-    categoryId: number;
-  };
-}
-
 export function CategoryBreadcrumbs() {
   const { categoryParent, categorySubParent, category } = useParams();
   const { categoriesList } = useContext(CategoriesContext);
