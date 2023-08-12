@@ -18,13 +18,16 @@ export interface CategoryBreadcrumbsProps {
   /**
    * The category slug path.
    */
-  categorySlug?: string;
+  category?: {
+    categorySlug: string;
+    categoryId: number;
+  };
 }
 
 export function CategoryBreadcrumbs({
   categoryParent,
   categorySubParent,
-  categorySlug,
+  category,
 }: CategoryBreadcrumbsProps) {
   return (
     <Breadcrumb
@@ -47,12 +50,9 @@ export function CategoryBreadcrumbs({
           />
         </Breadcrumb.Item>
       ) : null}
-      {categorySlug ? (
+      {category ? (
         <Breadcrumb.Item>
-          <BreadcrumbLink
-            categoryParent="category"
-            categorySlug={categorySlug}
-          />
+          <BreadcrumbLink categoryParent="category" category={category} />
         </Breadcrumb.Item>
       ) : null}
     </Breadcrumb>
@@ -70,26 +70,27 @@ export function CategoryBreadcrumbs({
 export function BreadcrumbLink({
   categoryParent,
   categorySubParent,
-  categorySlug,
+  category,
 }: CategoryBreadcrumbsProps): JSX.Element {
   let toPath = "";
-  if (!categorySlug) {
+  if (!category) {
     toPath = replaceWholeSpaces(
-      [categoryParent, categorySubParent, categorySlug]
-        .filter(Boolean)
-        .join("/")
+      [categoryParent, categorySubParent].filter(Boolean).join("/")
     );
   } else {
-    toPath = `category/${replaceWholeSpaces(categorySlug)}`;
+    toPath = `category/${replaceWholeSpaces(category.categorySlug)}/${
+      category.categoryId
+    }`;
   }
-  const lastCategory = categorySlug || categorySubParent || categoryParent;
+  const lastCategory =
+    category?.categorySlug || categorySubParent || categoryParent;
   return (
     <Link
       to={"/" + toPath}
       state={{
         parentUrl: categoryParent,
         subParentUrl: categorySubParent,
-        categorySlug: categorySlug,
+        category: category,
       }}
     >
       {lastCategory}
