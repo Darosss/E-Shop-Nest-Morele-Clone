@@ -1,22 +1,17 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { CategoryBreadcrumbs } from "../Breadcrumbs";
 import { AllCategories } from "./AllCategories";
 
 export function CategoryHeadView() {
-  const { state } = useLocation();
-
+  const { categoryParent, categorySubParent } = useParams();
   return (
     <>
       <div>
-        <CategoryBreadcrumbs
-          categoryParent={state?.parentUrl}
-          categorySubParent={state?.subParentUrl}
-        />
+        <CategoryBreadcrumbs />
       </div>
       <div className="m-[32px_0_32px]">
         <h1 className="text-[22px] font-semibold">
-          {state?.subParentUrl || state?.parentUrl}
+          {categorySubParent || categoryParent}
         </h1>
       </div>
 
