@@ -1,6 +1,5 @@
-import React from "react";
 import { Category } from "../interfaces";
-import { BreadcrumbLink } from "../categories";
+import { Link } from "react-router-dom";
 
 export function CategoryMenu({
   subcategories,
@@ -14,7 +13,7 @@ export function CategoryMenu({
   return (
     <>
       <div
-        className={`hidden  rounded border-[2px] border-orange bg-body absolute left-[260px] min-h-[100%] p-[32px] top-0 z-1 right-0 ${className} `}
+        className={`hidden rounded border-[2px] border-orange bg-body absolute left-[260px] min-h-[100%] p-[32px] top-0 z-1 right-0 ${className} `}
       >
         {/* cn-shop-window cn-level */}
         <div className="flex justify-between">
@@ -23,18 +22,15 @@ export function CategoryMenu({
           {subcategories?.map((category, idx) => (
             <ul key={idx} className="font-normal">
               <li className="font-semibold">
-                <BreadcrumbLink
-                  categoryParent={parentUrl}
-                  categorySubParent={category.name}
-                />
+                <Link to={`${parentUrl}/${category.name}`}>
+                  {category.name}
+                </Link>
               </li>
-              {category.subcategories?.map((categorySlug, thidIdx) => (
+              {category.subcategories?.map(({ name }, thidIdx) => (
                 <li key={thidIdx}>
-                  <BreadcrumbLink
-                    categoryParent={parentUrl}
-                    categorySubParent={category.name}
-                    categorySlug={`${categorySlug.name}-${categorySlug.id}`}
-                  />
+                  <Link to={`${parentUrl}/${category.name}/${name}`}>
+                    {name}
+                  </Link>
                 </li>
               ))}
             </ul>
