@@ -24,7 +24,7 @@ export function App() {
               <Route path="/" element={<Home />} />
 
               <Route
-                path="/category/:categorySlug"
+                path="/category/:categorySlug/:categoryId"
                 element={<CategoryView />}
               />
               <Route path="/:categoryParent" element={<CategoryHeadView />}>
