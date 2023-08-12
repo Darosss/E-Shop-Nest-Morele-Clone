@@ -9,14 +9,14 @@ export function ParentCategoryDropdown() {
   return (
     <>
       <nav className="group/menu head-menu max-w-full w-[260px] shadow-default flex content-center justify-center ">
-        <div className="flex align-center items-center text-orange font-semibold">
+        <div className="flex align-center items-center text-orange font-semibold ">
           KATEGORIE
           {/* cn-heading */}
         </div>
         <div
           className={`${
             pathname === "/" ? "flex" : "group-hover/menu:flex hidden"
-          } absolute top-full rounded-b-xl min-h-[597px] left-0 right-0 hover:z-40`}
+          } absolute top-full rounded-b-xl min-h-[597px] left-0 right-0 group-hover/menu:z-40`}
         >
           {/* cn-window*/}
           <div className="bg-body w-[260px] min-h-[597px] ">
