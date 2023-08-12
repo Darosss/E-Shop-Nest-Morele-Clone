@@ -82,14 +82,16 @@ interface BreadcrumbDropdownMenuProps {
 
 function BreadcrumbDropdownMenu({ label, items }: BreadcrumbDropdownMenuProps) {
   return (
-    <div className="[&>*]:text-default [&>*]:border-0 [&>*]:hover:bg-body [&>*]:rounded-none">
+    <div className="[&>*]:text-default [&>*]:border-0 [&>*]:hover:bg-body [&>*]:rounded">
       {items.length > 0 ? (
         <Dropdown label={label} trigger="hover" className="bg-body mt-[-10px]">
           {items.map((item, idx) => {
             const splitUrl = item.split("/");
             return (
               <Dropdown.Item key={idx} className="hover:underline">
-                <Link to={`/${item}`}>{splitUrl[splitUrl.length - 1]}</Link>
+                <Link className="w-full text-left" to={`/${item}`}>
+                  {splitUrl[splitUrl.length - 1]}
+                </Link>
               </Dropdown.Item>
             );
           })}
