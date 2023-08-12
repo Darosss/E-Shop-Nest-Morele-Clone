@@ -30,7 +30,7 @@ export function AllCategories() {
           key={idx}
           to={`${
             categorySubParent
-              ? `/category/${category.name}/${category.id}`
+              ? `/${categoryParent}/${categorySubParent}/${category.name}`
               : `${category.name}`
           }`}
           className="flex flex-[0_0_24%] items-center justify-between p-2"
