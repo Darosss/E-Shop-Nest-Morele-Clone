@@ -1,7 +1,7 @@
-import React from "react";
-import { Breadcrumb } from "flowbite-react";
-import { Link } from "react-router-dom";
-import { replaceWholeSpaces } from "../helpers/string.helpers";
+import { useContext, useEffect, useState } from "react";
+import { Breadcrumb, Dropdown } from "flowbite-react";
+import { Link, useParams } from "react-router-dom";
+import { CategoriesContext } from "../api/CategoriesContext";
 
 /**
  * Props for the BreadcrumbLink component.
@@ -24,76 +24,100 @@ export interface CategoryBreadcrumbsProps {
   };
 }
 
-export function CategoryBreadcrumbs({
-  categoryParent,
-  categorySubParent,
-  category,
-}: CategoryBreadcrumbsProps) {
+export function CategoryBreadcrumbs() {
+  const { categoryParent, categorySubParent, category } = useParams();
+  const { categoriesList } = useContext(CategoriesContext);
+
+  const [parentSubCatNames, setParentSubCatNames] = useState<string[]>([]);
+  const [subParentCatNames, setSubParentCatNames] = useState<string[]>([]);
+
+  useEffect(() => {
+    const parentCatObj = categoriesList.find(
+      (cat) => cat.name === categoryParent
+    );
+    const subCatsParentObj = parentCatObj?.subcategories?.map(
+      (subCat) => subCat
+    );
+    if (!parentCatObj) return;
+
+    setParentSubCatNames(
+      subCatsParentObj
+        ?.map((cat) => {
+          if (cat.name !== categorySubParent)
+            return `${categoryParent}/${cat.name}`;
+          else return "";
+        })
+        .filter(Boolean) || []
+    );
+    setSubParentCatNames(
+      subCatsParentObj
+        ?.map((cat) => {
+          if (cat.name === categorySubParent) {
+            return cat.subcategories?.map((thirdDepthCat) => {
+              if (thirdDepthCat.name !== category) {
+                return `${parentCatObj.name}/${cat.name}/${thirdDepthCat.name}`;
+              } else return "";
+            });
+          } else return "";
+        })
+        .flat()
+        .filter(Boolean) || []
+    );
+  }, [categoriesList, categoryParent, categorySubParent, category]);
+
   return (
     <Breadcrumb
       className="py-3 [&>ol>li>*]:text-[16px]"
       aria-label="category-breadcrumb"
     >
-      <Breadcrumb.Item href="/">
-        <p>morele.net</p>
+      <Breadcrumb.Item>
+        <Link to="/">morele.net</Link>
       </Breadcrumb.Item>
-      {categoryParent ? (
+      <Breadcrumb.Item>
+        <BreadcrumbDropdownMenu
+          label={categoryParent || ""}
+          items={parentSubCatNames}
+        />
+      </Breadcrumb.Item>
+      {categorySubParent || category ? (
         <Breadcrumb.Item>
-          <BreadcrumbLink categoryParent={categoryParent} />
-        </Breadcrumb.Item>
-      ) : null}
-      {categorySubParent ? (
-        <Breadcrumb.Item>
-          <BreadcrumbLink
-            categoryParent={categoryParent}
-            categorySubParent={categorySubParent}
+          <BreadcrumbDropdownMenu
+            label={categorySubParent || ""}
+            items={subParentCatNames}
           />
         </Breadcrumb.Item>
       ) : null}
       {category ? (
         <Breadcrumb.Item>
-          <BreadcrumbLink categoryParent="category" category={category} />
+          <Link to="">{category}</Link>
         </Breadcrumb.Item>
       ) : null}
     </Breadcrumb>
   );
 }
 
-/**
- * BreadcrumbLink component represents a breadcrumb link that generates the 'to' prop
- * based on the provided category paths (categoryParent, categorySubParent, and categorySlug).
- * The link content displays the name of the last provided category path.
- *
- * @param {BreadcrumbLinkProps} props - The component props.
- * @returns {JSX.Element} JSX.Element representing the breadcrumb link.
- */
-export function BreadcrumbLink({
-  categoryParent,
-  categorySubParent,
-  category,
-}: CategoryBreadcrumbsProps): JSX.Element {
-  let toPath = "";
-  if (!category) {
-    toPath = replaceWholeSpaces(
-      [categoryParent, categorySubParent].filter(Boolean).join("/")
-    );
-  } else {
-    toPath = `category/${replaceWholeSpaces(category.categorySlug)}/${
-      category.categoryId
-    }`;
-  }
-  const lastCategory =
-    category?.categorySlug || categorySubParent || categoryParent;
+interface BreadcrumbDropdownMenuProps {
+  label: string;
+  items: string[];
+}
+
+function BreadcrumbDropdownMenu({ label, items }: BreadcrumbDropdownMenuProps) {
   return (
-    <Link
-      to={"/" + toPath}
-      state={{
-        parentUrl: categoryParent,
-        subParentUrl: categorySubParent,
-        category: category,
-      }}
-    >
-      {lastCategory}
-    </Link>
+    <div className="[&>*]:text-default [&>*]:border-0 [&>*]:hover:bg-body [&>*]:rounded-none">
+      {items.length > 0 ? (
+        <Dropdown label={label} trigger="hover" className="bg-body mt-[-10px]">
+          {items.map((item, idx) => {
+            const splitUrl = item.split("/");
+            return (
+              <Dropdown.Item key={idx} className="hover:underline">
+                <Link to={`/${item}`}>{splitUrl[splitUrl.length - 1]}</Link>
+              </Dropdown.Item>
+            );
+          })}
+        </Dropdown>
+      ) : (
+        <Link to={`/${label}`}>{label}</Link>
+      )}
+    </div>
   );
 }
