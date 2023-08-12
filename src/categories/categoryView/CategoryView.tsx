@@ -7,12 +7,28 @@ import {
   Select,
   TextInput,
 } from "flowbite-react";
-import { FavouriteButton } from "../FavouriteButton";
+import { useEffect, useState } from "react";
+import { CategoriesEndpoints } from "../../api/backend-endpoints";
+import axios from "axios";
+import { Category } from "../../interfaces";
+import { ProductsList } from "./ProductsList";
 
 export function CategoryView() {
   const { state } = useLocation();
-  const { categoryParent, categorySubParent, categorySlug } = useParams();
+  const { categoryParent, categorySubParent, categorySlug, categoryId } =
+    useParams();
 
+  const [currentCategory, setCurrentCategory] = useState<Category>();
+
+  useEffect(() => {
+    if (categoryId) {
+      axios
+        .get(`${CategoriesEndpoints.GET_HEAD_CATEGORIES}/${categoryId}`)
+        .then(({ data: responseData }) => {
+          setCurrentCategory(responseData.data);
+        });
+    }
+  }, [categoryId]);
   return (
     <>
       <div>
@@ -20,7 +36,7 @@ export function CategoryView() {
         <CategoryBreadcrumbs
           categoryParent={state?.parentUrl || categoryParent}
           categorySubParent={state?.subParentUrl || categorySubParent}
-          categorySlug={state?.categorySlug || categorySlug}
+          category={state?.category ?? { categoryId, categorySlug }}
         />
       </div>
       <div className="container-fluid">
@@ -77,78 +93,7 @@ export function CategoryView() {
                 </div>
               </div>
               <div>
-                {Array(10)
-                  .fill(0)
-                  .map((_, idx) => (
-                    <div
-                      key={idx}
-                      className="bg-body round-md mt-[32px] p-[16px_8px_8px_64px] flex "
-                    >
-                      <div className="flex-[0_0_15%]">
-                        <img src="/products/5939894_0_i256.jpg" alt="product" />
-                        <Button className="mt-1 w-full text-default [&>*]:text-[10px]">
-                          Dodaj do porównania
-                        </Button>
-                      </div>
-
-                      <div className="flex-[1_0_50%] [&>div]:mt-[16px] relative">
-                        <div className="absolute left-[-2rem] top-[-3rem] transform scale-75">
-                          <FavouriteButton productId={idx} />
-                        </div>
-                        <div className="ml-[64px] [&>*]:mt-[16px]">
-                          <h3 className="font-semibold text-[17px]">
-                            Smartfon Apple iPhone 11 64GB Dual SIM Czarny
-                            (MHDA3)
-                            <span className="ml-[8px] text-orange text-[14px]">
-                              BESTSELLER
-                            </span>
-                          </h3>
-                          <div className="flex [&>div]:mr-[32px]">
-                            <div>***** (23) </div>
-                            <div>19 pytań</div>
-                            <div>Kupily 44 osoby</div>
-                          </div>
-                          <div>
-                            <ol className="text-[12px]">
-                              <li>Aparat głowny: 12 + 12Mpix</li>
-                              <li>Aparat głowny: 12 + 12Mpix</li>
-                              <li>Aparat głowny: 12 + 12Mpix</li>
-                              <li>Aparat głowny: 12 + 12Mpix</li>
-                              <li>Aparat głowny: 12 + 12Mpix</li>
-                              <li>Aparat głowny: 12 + 12Mpix</li>
-                              {/* TODO: add item head info */}
-                            </ol>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex-[0_0_24%] [&>div]:mt-[16px]">
-                        <div>
-                          <div className="text-[24px] font-semibold">
-                            2 397 zł
-                          </div>
-                          <div className="text-[10px] underline">
-                            rata od 60,84 zł
-                          </div>
-                        </div>
-
-                        <div>
-                          <div>Darmowa dostawa!</div>
-                          <div>U Ciebie za ok. 3dni! (poniedziałek) </div>
-                          {/*TODO: divhidden Outlet item if is */}
-                          {/*TODO: div hidden promotion like 10% rabat */}
-                        </div>
-
-                        <div> 13 ofert od 3 197,91 zł</div>
-
-                        <div>
-                          <Button className="common-button-w-background h-[50px] font-semibold">
-                            Do Koszyka
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+                <ProductsList products={currentCategory?.products} />
               </div>
               <div className="mt-[24px]">
                 <Pagination
