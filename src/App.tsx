@@ -1,5 +1,4 @@
 import "./App.css";
-import React from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -23,17 +22,13 @@ export function App() {
             <Route element={<DefaultWrapper />}>
               <Route path="/" element={<Home />} />
 
-              <Route
-                path="/category/:categorySlug/:categoryId"
-                element={<CategoryView />}
-              />
-              <Route path="/:categoryParent" element={<CategoryHeadView />}>
+              <Route path=":categoryParent">
                 <Route index element={<CategoryHeadView />} />
 
-                <Route
-                  path=":categorySubParent"
-                  element={<CategoryHeadView />}
-                />
+                <Route path=":categorySubParent">
+                  <Route index element={<CategoryHeadView />} />
+                  <Route path=":category" element={<CategoryView />} />
+                </Route>
               </Route>
             </Route>
 
