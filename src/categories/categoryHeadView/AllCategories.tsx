@@ -7,12 +7,13 @@ import { Category } from "../../interfaces";
 export function AllCategories() {
   const { categoryParent, categorySubParent } = useParams();
   const [subCategories, setSubCategories] = useState<Category[]>([]);
-
   useEffect(() => {
-    if (categoryParent && categorySubParent) {
+    if (categoryParent || categorySubParent) {
       axios
         .get(
-          `${CategoriesEndpoints.GET_CATEGORY_BY_SLUG}/${categoryParent}/${categorySubParent}`
+          `${CategoriesEndpoints.GET_CATEGORY_BY_SLUG}/${categoryParent}/${
+            categorySubParent ?? ""
+          }`
         )
         .then((response) => {
           const responseData = response.data.data;
@@ -27,7 +28,11 @@ export function AllCategories() {
       {subCategories?.map((category, idx) => (
         <Link
           key={idx}
-          to={`/category/${category.name}/${category.id}`}
+          to={`${
+            categorySubParent
+              ? `/category/${category.name}/${category.id}`
+              : `${category.name}`
+          }`}
           className="flex flex-[0_0_24%] items-center justify-between p-2"
         >
           <div className="h-[80px]  overflow-hidden flex">

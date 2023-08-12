@@ -25,7 +25,7 @@ export function CategoryHeadView() {
           Wszystkie categorie
         </div>
         <div className="flex flex-wrap [&>a]:m-2 [&>a]:m-2 p-2">
-          <AllCategories  />
+          <AllCategories />
         </div>
       </div>
 
