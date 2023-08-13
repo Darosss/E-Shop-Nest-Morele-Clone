@@ -39,8 +39,10 @@ export function CategoryView() {
         <div className="m-[32px_0_0]">
           {/* category page */}
           <h1 className="text-[22px] font-semibold">
-            Category name (make an api call here to retrieve name and items -
-            {category})
+            {currentCategory?.name}
+            <span className="ml-3 text-[16px] font-normal">
+              ({currentCategory?.productsCount})
+            </span>
           </h1>
           <div className="flex ">
             <aside className="flex-[0_0_15%] mr-[32px]">
