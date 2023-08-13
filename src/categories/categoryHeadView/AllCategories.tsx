@@ -39,7 +39,7 @@ export function AllCategories() {
             <img src={`/category/${category.images[0]}`} alt="category" />
           </div>
           <div className="text-[16px] p-2 flex flex-[0_0_calc(100%-104px)]">
-            {category.name} (400)
+            {category.name} ({category.productsCount})
             {/* TODO: add count of items in category */}
           </div>
         </Link>
