@@ -8,4 +8,5 @@ export interface Category {
   subcategories: Category[];
   images: string[];
   products?: Product[];
+  productsCount?: number;
 }
