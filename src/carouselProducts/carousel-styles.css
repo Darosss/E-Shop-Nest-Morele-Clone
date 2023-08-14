@@ -1,0 +1,17 @@
+.alice-carousel__stage-item {
+  width: 200px;
+  max-width: 200px;
+}
+
+.alice-carousel__stage-item:not(:first-child) {
+  margin-left: 20px;
+}
+
+.alice-carousel__wrapper {
+  cursor: grab;
+}
+.alice-carousel__wrapper:active {
+  cursor: grabbing;
+}
+
+/* Styles are added for react-alice-carousel */
