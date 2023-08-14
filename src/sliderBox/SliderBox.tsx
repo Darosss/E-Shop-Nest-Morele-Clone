@@ -1,4 +1,5 @@
 import { Product } from "../interfaces";
+import { CarouselProducts } from "../carouselProducts";
 
 export function SliderBox({
   title,
@@ -26,26 +27,8 @@ export function SliderBox({
           <div className="swipper-container">
             <div className="h-100 flex relative">
               {/* swipper wrapper here arrow etc */}
-              {items.map((item, idx) => (
-                <a
-                  key={idx}
-                  href={"item-link"}
-                  className="w-[168px] p-[0_8px_8px] mr-[42px] [&>div]:mt-[4px]"
-                >
-                  <div>
-                    <img src="assets/12775308_0_i256.jpg" />{" "}
-                  </div>
-                  <div className="mb-[12px] mt-[10px] min-h-[20px]">
-                    {/* ps price box */}
-                  </div>
-                  <div className="font-semibold">{item.price} zł</div>
-                  <div className="text-[14px]">{item.name}</div>
-                  <div> * * * * *</div>
-                  {recomended ? (
-                    <div className="text-[12px]"> Kupily {item.sold} osob </div>
-                  ) : null}
-                </a>
-              ))}
+              <CarouselProducts items={items} recomended={recomended} />
+              {}
             </div>
           </div>
         </div>
