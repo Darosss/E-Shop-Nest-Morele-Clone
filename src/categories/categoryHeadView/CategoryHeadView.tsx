@@ -1,9 +1,15 @@
 import { useParams } from "react-router-dom";
 import { CategoryBreadcrumbs } from "../Breadcrumbs";
 import { AllCategories } from "./AllCategories";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { CategoriesEndpoints } from "../../api/backend-endpoints";
+import { Category } from "../../interfaces";
+import { CarouselProducts } from "../../carouselProducts";
 
 export function CategoryHeadView() {
   const { categoryParent, categorySubParent } = useParams();
+
   return (
     <>
       <div>
@@ -24,12 +30,11 @@ export function CategoryHeadView() {
         </div>
       </div>
 
-      <div className="bg-body rounded-md mt-[32px]">
-        <div className="py-2 pl-4 text-[18px] font-semibold">
-          Najczęsciej kupowane
-        </div>
-        <div>{/* TODO: add slider */}</div>
-      </div>
+      {categorySubParent ? (
+        <MostlyBought />
+      ) : (
+        <>TODO: Soon co w trawie piszczy </>
+      )}
 
       <div className="bg-body rounded-md mt-[32px]">
         <div className="py-2 pl-4 text-[18px] font-semibold">
@@ -45,5 +50,44 @@ export function CategoryHeadView() {
         <div>{/* TODO: add slider */}</div>
       </div>
     </>
+  );
+}
+
+function MostlyBought() {
+  const { categoryParent, categorySubParent } = useParams();
+  const [pagination] = useState<{ limit: number; page: number }>({
+    limit: 10,
+    page: 0,
+  });
+  const [currentCat, setCurrentCat] = useState<Category>();
+
+  useEffect(() => {
+    axios
+      .get<{ data: Category }>(
+        `${CategoriesEndpoints.GET_CATEGORY_BY_SLUG}/${categoryParent}/${
+          categorySubParent ?? ""
+        }?limit=${pagination.limit}&page=${
+          pagination.page
+        }&sortBy=sold&sortOrder=0`
+      )
+      .then(({ data: responseData }) => {
+        setCurrentCat(responseData.data);
+      });
+  }, [categoryParent, categorySubParent, pagination.limit, pagination.page]);
+
+  return (
+    <div className="bg-body rounded-md mt-[32px]">
+      <div className="py-2 pl-4 text-[18px] font-semibold">
+        Najczęsciej kupowane
+      </div>
+      <div>
+        {currentCat?.products ? (
+          <CarouselProducts
+            items={currentCat?.products.sort((a, b) => b.sold - a.sold)}
+            mostBought={true}
+          />
+        ) : null}
+      </div>
+    </div>
   );
 }
