@@ -19,7 +19,7 @@
   }
 
   .before-search-bar-cat {
-    @apply before:bg-body-opacity before:bottom-[8px] before:content-[''] before:left-[-16px] before:absolute before:top-[8px] before:w-[1px];
+    @apply before:bg-body-opacity before:bottom-[8px] before:content-[''] before:left-[3px] before:absolute before:top-[8px] before:w-[1px];
   }
 
   .common-button-w-background {
