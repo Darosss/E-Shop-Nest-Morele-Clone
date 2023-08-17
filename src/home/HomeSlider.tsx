@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Carousel } from "flowbite-react";
 
 //TODO: this from api call later
+//TODO: imgbig, indicator, url
 const mockedPromotions = [
   {
     imgBig: "assets/big_image_2959.png",
@@ -38,7 +39,7 @@ export function HomeSlider() {
 
   return (
     <>
-      <div className="min-w-[617px] pl-[260px]">
+      <div className="min-w-[617px] lg:pl-[260px]">
         {/* home promotion slider */}
         <div>
           {/* pomotion slider */}
@@ -46,7 +47,7 @@ export function HomeSlider() {
             {/* swiper container ps windows swiper container horizontal */}
             <div>
               <Carousel
-                className="h-[465px] rounded-md"
+                className="h-[465px] rounded-md "
                 slideInterval={10000}
                 onSlideChange={(slideIdx) => setActiveSlideIdx(slideIdx)}
                 indicators={false}
