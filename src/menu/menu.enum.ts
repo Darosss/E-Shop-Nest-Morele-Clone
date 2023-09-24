@@ -13,4 +13,6 @@ export enum MenuImages {
   CART = "/icons/cart-empty.svg",
   LOGIN = "/icons/login-empty.svg",
   SHOP_LIST = "/icons/shop-list-empty.svg",
+  LOUPE = "/icons/loupe.svg",
+  HOME = "/icons/home.svg",
 }
