@@ -38,6 +38,8 @@ export default {
     },
     borderColor: {
       orange: "#ff503c",
+      default: "#0d0d0d",
+      "light-gray": "#cbcbcb",
     },
   },
   plugins: [require("flowbite/plugin")],
