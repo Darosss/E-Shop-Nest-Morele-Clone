@@ -5,6 +5,8 @@ interface MobileContextType {
   changeShowCategoriesMenu: (value: boolean) => void;
   showSubCategories: boolean;
   changeShowSubCategories: (value: boolean) => void;
+  showMoreMenu: boolean;
+  changeShowMoreMenu: (value: boolean) => void;
 }
 
 export const MobilleMenuContext = createContext<MobileContextType>({
@@ -12,6 +14,8 @@ export const MobilleMenuContext = createContext<MobileContextType>({
   changeShowCategoriesMenu: () => {},
   showSubCategories: false,
   changeShowSubCategories: () => {},
+  showMoreMenu: false,
+  changeShowMoreMenu: () => {},
 });
 
 export const MobilleMenuContextProvider = ({
@@ -21,11 +25,15 @@ export const MobilleMenuContextProvider = ({
 }): JSX.Element => {
   const [showCategoriesMenu, setShowCategoriesMenu] = useState(false);
   const [showSubCategories, setShowSubcategories] = useState(false);
+  const [showMoreMenu, setShowMoreMenu] = useState(false);
 
   const changeShowCategoriesMenu = (value: boolean) =>
     setShowCategoriesMenu(value);
+
   const changeShowSubCategories = (value: boolean) =>
     setShowSubcategories(value);
+
+  const changeShowMoreMenu = (value: boolean) => setShowMoreMenu(value);
 
   return (
     <MobilleMenuContext.Provider
@@ -34,6 +42,8 @@ export const MobilleMenuContextProvider = ({
         changeShowCategoriesMenu,
         showSubCategories,
         changeShowSubCategories,
+        showMoreMenu,
+        changeShowMoreMenu,
       }}
     >
       {children}
