@@ -3,6 +3,10 @@ export enum CategoriesEndpoints {
   GET_CATEGORY_BY_SLUG = GET_HEAD_CATEGORIES + "/slug",
 }
 
+export enum ProductsEndpoints {
+  GET_PRODUCTS = "/product",
+}
+
 export enum AuthEndpoints {
   LOGIN = "/auth/login",
   REGISTER = "/auth/register",
