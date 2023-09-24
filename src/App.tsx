@@ -6,7 +6,12 @@ import {
   Outlet,
 } from "react-router-dom";
 import { Home } from "./home";
-import { HeadMenu, CategoriesMenu } from "./menu";
+import {
+  HeadMenu,
+  CategoriesMenu,
+  MobileMenu,
+  MobilleMenuContextProvider,
+} from "./menu";
 import { Footer } from "./footer";
 import { AuthForms } from "./authForms";
 import { AuthContextProvider } from "./auth";
@@ -46,7 +51,7 @@ export function App() {
 
 function DefaultWrapper() {
   return (
-    <>
+    <div className="relative">
       <CategoriesContextProvider>
         <div className="sticky top-0 z-50 bg-body">
           <HeadMenu />
@@ -60,7 +65,10 @@ function DefaultWrapper() {
           </div>
           <Footer />
         </main>
+        <MobilleMenuContextProvider>
+          <MobileMenu />
+        </MobilleMenuContextProvider>
       </CategoriesContextProvider>
-    </>
+    </div>
   );
 }
