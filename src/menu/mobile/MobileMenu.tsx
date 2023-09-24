@@ -4,18 +4,24 @@ import { ReactPortal } from "../../helpers/ReactPortal.helpers";
 import { useContext } from "react";
 import { MobilleMenuContext } from "./mobileMenuContext";
 import { MobileCategoriesMenu } from "./MobileCategoriesMenu";
+import { MobileMenuMore } from "./MobileMenuMore";
 
 export function MobileMenu() {
-  const { changeShowCategoriesMenu, showCategoriesMenu } =
-    useContext(MobilleMenuContext);
+  const {
+    changeShowCategoriesMenu,
+    showCategoriesMenu,
+    showMoreMenu,
+    changeShowMoreMenu,
+  } = useContext(MobilleMenuContext);
 
-  console.log(showCategoriesMenu);
   return (
     <ReactPortal wrapperId="root">
       <div className="fixed left-0 right-0  bottom-0 lg:hidden z-[99] ">
-        <div className="bg-body left-0 right-0 top-0 bottom-[60px]">
+        <div className="bg-body bottom-[60px]">
           {showCategoriesMenu ? <MobileCategoriesMenu /> : null}
         </div>
+        <div>{showMoreMenu ? <MobileMenuMore /> : null}</div>
+
         <div className="bg-body min-w-[300px] max-h-[60px] min-h-[60px] flex items-center shadow-default absolute bottom-0 left-0 right-0">
           <div className="h-full text-[12px] flex justify-between  flex-1 [&>*>img]:w-[12%] [&>*]:flex-col [&>*]:flex [&>*]:items-center [&>*]:text-center ">
             <Link to="/" onClick={() => changeShowCategoriesMenu(false)}>
@@ -40,7 +46,8 @@ export function MobileMenu() {
               <img src={MenuImages.LOGIN} />
               Konto
             </Link>
-            <button onClick={() => console.log("TODO: soon menu")}>
+            <button onClick={() => changeShowMoreMenu(true)}>
+              {/* TODO: change image */}
               <img src={MenuImages.LOGIN} />
               Więcej
             </button>
