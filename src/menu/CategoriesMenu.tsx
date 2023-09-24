@@ -6,7 +6,7 @@ export function CategoriesMenu() {
     <>
       <div className="min-w-[120px] bg-white shadow-default">
         <div className="container-fluid">
-          <div className="mr-[8px] flex flex-wrap relative">
+          <div className="hidden lg:flex mr-[8px]  flex-wrap relative">
             <ParentCategoryDropdown />
             <nav className="w-100 min-w-[400px] flex-[1_1_calc(100%-280px)] w-[calc(100%-280%)]">
               <div className="pl-[10px] w-full justify-between items-end ">
