@@ -15,20 +15,23 @@ export function CategoryMenu({
       <div
         className={`hidden rounded border-[2px] border-orange bg-body absolute left-[260px] min-h-[100%] p-[32px] top-0 z-1 right-0 ${className} `}
       >
-        {/* cn-shop-window cn-level */}
         <div className="flex justify-between">
-          {/* cn rows */}
-
           {subcategories?.map((category, idx) => (
             <ul key={idx} className="font-normal">
               <li className="font-semibold">
-                <Link to={`${parentUrl}/${category.name}`}>
+                <Link
+                  to={`${parentUrl}/${category.name}`}
+                  className="hover:underline"
+                >
                   {category.name}
                 </Link>
               </li>
               {category.subcategories?.map(({ name }, thidIdx) => (
                 <li key={thidIdx}>
-                  <Link to={`${parentUrl}/${category.name}/${name}`}>
+                  <Link
+                    to={`${parentUrl}/${category.name}/${name}`}
+                    className="hover:underline"
+                  >
                     {name}
                   </Link>
                 </li>
