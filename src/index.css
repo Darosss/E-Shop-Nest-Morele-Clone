@@ -25,10 +25,14 @@
   .common-button-w-background {
     @apply bg-orange font-semibold text-white p-[16px_16px] rounded-md w-full;
   }
+
   .common-button-w-outline {
     @apply flex text-orange font-semibold justify-center border border-orange rounded-md w-full p-[12px_16px];
   }
 
+  .common-button-w-background-inverted {
+    @apply bg-body font-semibold rounded-md hover:bg-orange rounded-md;
+  }
   .auth-form {
     @apply w-full text-center mt-4 flex flex-col justify-center [&>input]:rounded-md [&>input]:mt-3 [&>input]:text-[14px] [&>div]:mt-[32px];
   }
