@@ -17,6 +17,7 @@ import { AuthForms } from "./authForms";
 import { AuthContextProvider } from "./auth";
 import { CategoriesContextProvider } from "./api/CategoriesContext";
 import { CategoryHeadView, CategoryView } from "./categories/";
+import { ProductView } from "./product";
 
 export function App() {
   return (
@@ -26,6 +27,7 @@ export function App() {
           <Routes>
             <Route element={<DefaultWrapper />}>
               <Route path="/" element={<Home />} />
+              <Route path="product/:name/:id" element={<ProductView />} />
 
               <Route path=":categoryParent">
                 <Route index element={<CategoryHeadView />} />
