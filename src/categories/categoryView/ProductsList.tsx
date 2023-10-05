@@ -2,6 +2,7 @@ import { Button } from "flowbite-react";
 import { Product } from "../../interfaces";
 import { FavouriteButton } from "../FavouriteButton";
 import { StarRating } from "../../StarRating/StarRating";
+import { Link } from "react-router-dom";
 
 interface ProductsListProps {
   products?: Product[];
@@ -28,7 +29,9 @@ export function ProductsList({ products }: ProductsListProps) {
             </div>
             <div className="ml-[64px] [&>*]:mt-[16px]">
               <h3 className="font-semibold text-[17px]">
-                {product.name}
+                <Link to={`/product/${product.name}/${product.id}`}>
+                  {product.name}
+                </Link>
                 <span className="ml-[8px] text-orange text-[14px]">
                   BESTSELLER
                 </span>
