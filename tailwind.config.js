@@ -32,6 +32,8 @@ export default {
       default: "#0d0d0d",
       white: "#fff",
       orange: "#ff503c",
+      "light-gray": "#cbcbcb",
+      "dark-gray": "#757575",
     },
     outlineColor: {
       orange: "#ff503c",
