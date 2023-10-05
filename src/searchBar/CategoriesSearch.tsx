@@ -7,7 +7,7 @@ export function CategoriesSearch() {
   const { categoriesList } = useContext(CategoriesContext);
 
   return (
-    <Select className="[&>*>*]:border-0" id="countries" required>
+    <Select className="[&>*>*]:border-0" required>
       <option>Wszystkie działy</option>
       {categoriesList?.map((category, idx) => (
         <option key={idx}>{category.name}</option>
