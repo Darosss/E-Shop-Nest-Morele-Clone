@@ -21,9 +21,11 @@ export function CategoriesContextProvider({
 
   useEffect(() => {
     axios
-      .get<ApiResponse<Category[]>>(CategoriesEndpoints.GET_HEAD_CATEGORIES)
+      .get<ApiResponse<Category[] | null>>(
+        CategoriesEndpoints.GET_HEAD_CATEGORIES
+      )
       .then((response) => {
-        setCategoriesList(response.data.data);
+        setCategoriesList(response.data.data || []);
       })
       .catch((err) => console.error(err));
   }, []);
